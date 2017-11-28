@@ -1,0 +1,52 @@
+<div class="container top-30">
+  <div class="row">
+    <div class="col-md-3">
+      <img class="img-circle img-responsive img-thumbnail animated fadeIn" width="100%" [src]="artista.images | sinfoto " alt="{{ artista }}">
+    </div>
+    <div class="col-md-9">
+      <h3 class="text-center animated fadeIn">{{ artista.name }}, <small>Popularidad: {{ artista.popularity }}%</small></h3>
+      <br>
+      <a [routerLink]="['/buscar']" class="btn btn-primary btn-block animated fadeIn">
+        Regresar...
+      </a>
+      <a [href]="artista.external_urls?.spotify" target="_blank" class="btn btn-success btn-block animated fadeIn">
+        Ver pagina
+      </a>
+    </div>
+  </div>
+  <div class="row top-30">
+    <h1>Top Tracks</h1>
+    <table class="table table-inverse table-responsive table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Foto</th>
+          <th>Cancion</th>
+          <th>Popularidad</th>
+          <th>Preview</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pista of pistas; let i = index">
+          <th>{{ i + 1 }}</th>
+          <th>
+            <img class="img-responsive animated fadeIn img-50" [src]="pista.album?.images | sinfoto " alt="{{ pista.name }}">
+          </th>
+          <td>
+            {{ pista.name }}
+          </td>
+          <td>
+            {{ pista.popularity }}%
+          </td>
+          <td>
+            <!-- <audio controls>
+              <source [src]="pista.preview_url">
+                Tu navegador es muy viejo
+            </audio> -->
+            <iframe [src]="pista.uri | domseguro:'https://open.spotify.com/embed?uri='" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
